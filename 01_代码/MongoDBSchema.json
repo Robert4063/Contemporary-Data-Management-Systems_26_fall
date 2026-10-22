@@ -1,0 +1,143 @@
+{
+  "users": {
+    "$jsonSchema": {
+      "bsonType": "object",
+      "required": [
+        "username",
+        "password_hash",
+        "created_at"
+      ],
+      "properties": {
+        "username": {
+          "bsonType": "string"
+        },
+        "password_hash": {
+          "bsonType": "string"
+        },
+        "created_at": {
+          "bsonType": "date"
+        }
+      }
+    }
+  },
+  "sessions": {
+    "$jsonSchema": {
+      "bsonType": "object",
+      "required": [
+        "user_id",
+        "token_hash",
+        "expires_at"
+      ],
+      "properties": {
+        "user_id": {
+          "bsonType": "objectId"
+        },
+        "token_hash": {
+          "bsonType": "string"
+        },
+        "expires_at": {
+          "bsonType": "date"
+        }
+      }
+    }
+  },
+  "surveys": {
+    "$jsonSchema": {
+      "bsonType": "object",
+      "required": [
+        "owner_id",
+        "title",
+        "status",
+        "questions",
+        "revision",
+        "schema_version",
+        "created_at"
+      ],
+      "properties": {
+        "owner_id": {
+          "bsonType": "objectId"
+        },
+        "title": {
+          "bsonType": "string"
+        },
+        "status": {
+          "enum": [
+            "draft",
+            "published",
+            "closed"
+          ]
+        },
+        "questions": {
+          "bsonType": "array"
+        },
+        "revision": {
+          "bsonType": "int"
+        },
+        "schema_version": {
+          "bsonType": "int"
+        },
+        "created_at": {
+          "bsonType": "date"
+        },
+        "deadline": {
+          "bsonType": [
+            "date",
+            "null"
+          ]
+        },
+        "allow_anonymous": {
+          "bsonType": "bool"
+        },
+        "allow_multiple": {
+          "bsonType": "bool"
+        }
+      }
+    }
+  },
+  "responses": {
+    "$jsonSchema": {
+      "bsonType": "object",
+      "required": [
+        "survey_id",
+        "survey_revision",
+        "answers",
+        "path",
+        "anonymous",
+        "submitted_at",
+        "schema_version"
+      ],
+      "properties": {
+        "survey_id": {
+          "bsonType": "objectId"
+        },
+        "survey_revision": {
+          "bsonType": "int"
+        },
+        "answers": {
+          "bsonType": "object"
+        },
+        "path": {
+          "bsonType": "array"
+        },
+        "anonymous": {
+          "bsonType": "bool"
+        },
+        "submitted_at": {
+          "bsonType": "date"
+        },
+        "respondent_id": {
+          "bsonType": "objectId"
+        },
+        "respondent_key": {
+          "bsonType": "string"
+        },
+        "submission_key": {
+          "bsonType": "string"
+        },
+        "payload_hash": {
+          "bsonType": "string"
+        }
+      }
+    }
+  }
+}
