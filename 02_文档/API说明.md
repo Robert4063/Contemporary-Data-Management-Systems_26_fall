@@ -1,6 +1,6 @@
 # 第一阶段最终API
 
-本文是调用协议，说明请求字段、响应语义、权限和错误处理；[项目完成报告](../04_项目完成报告/项目完成报告.pdf)对接口承担的功能作概述，不替代这些协议细节。实现见[main.py](../01_代码/backend/app/main.py)，请求模型见[models.py](../01_代码/backend/app/models.py)。
+本文是调用协议，说明请求字段、响应语义、权限和错误处理；[项目完成报告](../04_项目完成报告/2026_ECNU_PJ1_1_杨家辉.pdf)对接口承担的功能作概述，不替代这些协议细节。实现见[main.py](../01_代码/backend/app/main.py)，请求模型见[models.py](../01_代码/backend/app/models.py)。
 
 基础路径/api，请求响应为JSON。除注册、登录、健康检查外，API均要求Authorization: Bearer <access_token>。问卷ID为24位ObjectId字符串，非法ID统一404。网页HTML骨架不包含业务数据，状态和只读详情也必须登录。
 

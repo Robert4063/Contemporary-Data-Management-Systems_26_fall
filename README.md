@@ -12,7 +12,7 @@ GitHub：[Robert4063/Contemporary-Data-Management-Systems_26_fall](https://githu
 ├─ 01_代码/
 │  ├─ README.md                      源码快速入口
 │  ├─ .env.example                   环境配置示例，不含真实凭证
-│  ├─ MongoDBSchema.json             MongoDB 集合校验器与索引说明
+│  ├─ MongoDBSchema.json             MongoDB 集合类型校验结构
 │  ├─ backend/                       后端：Python / FastAPI / PyMongo
 │  │  ├─ requirements.txt            运行依赖
 │  │  └─ app/
@@ -45,7 +45,7 @@ GitHub：[Robert4063/Contemporary-Data-Management-Systems_26_fall](https://githu
 │     ├─ test_logic.py               校验与跳转规则边界
 │     └─ test_browser.py             Playwright 真实浏览器交互
 └─ 04_项目完成报告/
-   ├─ 项目完成报告.pdf               设计、实现、测试分析与 AI 使用说明
+   ├─ 2026_ECNU_PJ1_1_杨家辉.pdf     项目完成报告与 AI 使用说明
    └─ AI使用日志.md                  实际提示词、结果、修改及 AI 不足
 ```
 
@@ -72,7 +72,7 @@ mongod --version
 ```powershell
 Set-Location './01_代码'
 python -m venv .venv
-& './.venv/Scripts/python.exe' -m pip install -r './backend/requirements.txt'
+& './.venv/Scripts/python.exe' -m pip install -r './backend/requirements.txt' --index-url https://pypi.org/simple
 Copy-Item -LiteralPath './.env.example' -Destination './.env'
 ```
 
@@ -137,7 +137,7 @@ FastAPI 同时提供前端页面和后端接口，**前端不用单独启动，�
 
 ```powershell
 Set-Location '../03_测试用例'
-& '../01_代码/.venv/Scripts/python.exe' -m pip install -r './requirements-test.txt'
+& '../01_代码/.venv/Scripts/python.exe' -m pip install -r './requirements-test.txt' --index-url https://pypi.org/simple
 $env:SURVEY_TEST_SCOPE = 'full'
 & '../01_代码/.venv/Scripts/python.exe' -m pytest -v
 ```
@@ -173,6 +173,8 @@ $env:SURVEY_TEST_SCOPE = 'api-and-logic'
 
 另于 `2026-10-22 11:40:52 UTC` 完成从零运行核验：仅复制提交材料，在全新虚拟环境中按运行依赖清单从 PyPI 安装依赖，使用空的隔离 MongoDB 数据库启动。17 次 HTTP 检查全部通过，覆盖页面与静态资源、配置读取、集合自动初始化、注册登录、直接发布、配置跳转、非法数字拒绝、提交去重、统计和关闭后的只读访问。这次核验复用了本机已安装的 Python 3.13.2 与 MongoDB 可执行程序，不等同于在另一台全新电脑上实测。
 
+在上述全新环境中继续安装测试依赖并重跑，最终于 `2026-10-22 12:42:10 UTC` 得到 **126 项通过、0 失败、0 跳过**，耗时 **140.63 秒**，有 1 条相同的依赖弃用警告。首轮曾出现 125 项通过、1 项在 Chrome 启动阶段退出；该例单独复查通过后，再次完整运行得到以上结果，没有修改业务代码。各轮分别记录，不累计通过数。
+
 ## 7. 数据与文档阅读入口
 
 数据库使用四个集合：`users` 保存账号，`sessions` 保存登录会话，`surveys` 保存问卷及内嵌题目、校验和跳转配置，`responses` 独立保存每次合法提交。统计从答卷计算，不单独维护统计结果集合。
@@ -181,7 +183,7 @@ $env:SURVEY_TEST_SCOPE = 'api-and-logic'
 - [数据库设计](02_文档/数据库设计.md)：查看字段、索引、嵌入与引用的取舍。
 - [API 说明](02_文档/API说明.md)：查看接口及请求/响应格式。
 - [关键逻辑说明](02_文档/关键逻辑说明.md)：查看规则执行和边界处理。
-- [项目完成报告](04_项目完成报告/项目完成报告.pdf)：查看设计过程、结果分析与四项 AI 使用说明。
+- [项目完成报告](04_项目完成报告/2026_ECNU_PJ1_1_杨家辉.pdf)：查看设计过程、结果分析与四项 AI 使用说明。
 - [AI 使用日志](04_项目完成报告/AI使用日志.md)：查看真实提示词、生成结果与修改内容。
 
 ## 8. 常见启动问题
