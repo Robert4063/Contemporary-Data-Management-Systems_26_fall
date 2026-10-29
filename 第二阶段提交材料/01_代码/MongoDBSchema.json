@@ -1,0 +1,280 @@
+{
+  "users": {
+    "$jsonSchema": {
+      "bsonType": "object",
+      "required": [
+        "username",
+        "password_hash",
+        "created_at"
+      ],
+      "properties": {
+        "username": {
+          "bsonType": "string"
+        },
+        "password_hash": {
+          "bsonType": "string"
+        },
+        "created_at": {
+          "bsonType": "date"
+        }
+      }
+    }
+  },
+  "sessions": {
+    "$jsonSchema": {
+      "bsonType": "object",
+      "required": [
+        "user_id",
+        "token_hash",
+        "expires_at"
+      ],
+      "properties": {
+        "user_id": {
+          "bsonType": "objectId"
+        },
+        "token_hash": {
+          "bsonType": "string"
+        },
+        "expires_at": {
+          "bsonType": "date"
+        }
+      }
+    }
+  },
+  "questions": {
+    "$jsonSchema": {
+      "bsonType": "object",
+      "required": [
+        "question_id",
+        "question_version",
+        "owner_id",
+        "content",
+        "created_at"
+      ],
+      "properties": {
+        "question_id": {
+          "bsonType": "objectId"
+        },
+        "question_version": {
+          "bsonType": "int",
+          "minimum": 1
+        },
+        "owner_id": {
+          "bsonType": "objectId"
+        },
+        "parent": {
+          "bsonType": [
+            "object",
+            "null"
+          ]
+        },
+        "shared_with": {
+          "bsonType": "array",
+          "items": {
+            "bsonType": "objectId"
+          }
+        },
+        "restored_from": {
+          "bsonType": [
+            "object",
+            "null"
+          ]
+        },
+        "content": {
+          "bsonType": "object",
+          "required": [
+            "title",
+            "type",
+            "required",
+            "options",
+            "validation"
+          ],
+          "properties": {
+            "title": {
+              "bsonType": "string"
+            },
+            "type": {
+              "enum": [
+                "single",
+                "multiple",
+                "text",
+                "number"
+              ]
+            },
+            "required": {
+              "bsonType": "bool"
+            },
+            "options": {
+              "bsonType": "array"
+            },
+            "validation": {
+              "bsonType": "object"
+            }
+          }
+        },
+        "created_at": {
+          "bsonType": "date"
+        }
+      }
+    }
+  },
+  "usual_questions": {
+    "$jsonSchema": {
+      "bsonType": "object",
+      "required": [
+        "owner_id",
+        "question_id",
+        "question_version",
+        "revision",
+        "created_at"
+      ],
+      "properties": {
+        "owner_id": {
+          "bsonType": "objectId"
+        },
+        "question_id": {
+          "bsonType": "objectId"
+        },
+        "question_version": {
+          "bsonType": "int",
+          "minimum": 1
+        },
+        "in_library": {
+          "bsonType": "bool"
+        },
+        "removed_at": {
+          "bsonType": "date"
+        },
+        "revision": {
+          "bsonType": "int"
+        },
+        "created_at": {
+          "bsonType": "date"
+        }
+      }
+    }
+  },
+  "surveys": {
+    "$jsonSchema": {
+      "bsonType": "object",
+      "required": [
+        "survey_id",
+        "survey_version",
+        "owner_id",
+        "title",
+        "status",
+        "questions",
+        "revision",
+        "schema_version",
+        "created_at"
+      ],
+      "properties": {
+        "survey_id": {
+          "bsonType": "objectId"
+        },
+        "survey_version": {
+          "bsonType": "int",
+          "minimum": 1
+        },
+        "parent_version": {
+          "bsonType": [
+            "int",
+            "null"
+          ]
+        },
+        "owner_id": {
+          "bsonType": "objectId"
+        },
+        "title": {
+          "bsonType": "string"
+        },
+        "status": {
+          "enum": [
+            "draft",
+            "published",
+            "closed"
+          ]
+        },
+        "questions": {
+          "bsonType": "array"
+        },
+        "revision": {
+          "bsonType": "int"
+        },
+        "schema_version": {
+          "bsonType": "int"
+        },
+        "created_at": {
+          "bsonType": "date"
+        },
+        "deadline": {
+          "bsonType": [
+            "date",
+            "null"
+          ]
+        },
+        "allow_anonymous": {
+          "bsonType": "bool"
+        },
+        "allow_multiple": {
+          "bsonType": "bool"
+        }
+      }
+    }
+  },
+  "responses": {
+    "$jsonSchema": {
+      "bsonType": "object",
+      "required": [
+        "survey_document_id",
+        "survey_id",
+        "survey_version",
+        "survey_revision",
+        "answers",
+        "path",
+        "anonymous",
+        "submitted_at",
+        "schema_version"
+      ],
+      "properties": {
+        "survey_id": {
+          "bsonType": "objectId"
+        },
+        "survey_document_id": {
+          "bsonType": "objectId"
+        },
+        "survey_version": {
+          "bsonType": "int",
+          "minimum": 1
+        },
+        "survey_revision": {
+          "bsonType": "int"
+        },
+        "answers": {
+          "bsonType": "object"
+        },
+        "path": {
+          "bsonType": "array"
+        },
+        "anonymous": {
+          "bsonType": "bool"
+        },
+        "submitted_at": {
+          "bsonType": "date"
+        },
+        "respondent_id": {
+          "bsonType": "objectId"
+        },
+        "respondent_key": {
+          "bsonType": "string"
+        },
+        "submission_key": {
+          "bsonType": "string"
+        },
+        "payload_hash": {
+          "bsonType": "string"
+        }
+      }
+    }
+  }
+}
